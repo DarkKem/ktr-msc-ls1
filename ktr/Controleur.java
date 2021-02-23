@@ -1,11 +1,32 @@
 package ktr;
-import ktr.view.FramePrincipal;
+import ktr.metier.Profil;
+import ktr.view.IntefaceProfil;
 
 public class Controleur
 {
+    private Profil profil;
+
     public Controleur()
     {
-        new FramePrincipal(this);
+        this.play();
+    }
+
+    public void play()
+    {
+        IntefaceProfil.newProfil(this);
+        this.displayProfil();
+
+    }
+
+    public void addProfil(String name, String companyName, String email, String phone)
+    {
+        profil = new Profil(name, companyName, email, phone);
+    }
+
+    public void displayProfil()
+    {
+        if(profil != null)
+            IntefaceProfil.displayProfil(profil.getName(), profil.getCompanyName(), profil.getEmail(), profil.getPhone());
     }
 
     public static void main(String[] arg)
