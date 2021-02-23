@@ -1,6 +1,7 @@
 package ktr;
 import ktr.metier.Profil;
 import ktr.view.IntefaceProfil;
+import ktr.view.InterfaceProtection;
 
 public class Controleur
 {
@@ -13,6 +14,7 @@ public class Controleur
 
     public void play()
     {
+        InterfaceProtection.connection();
         IntefaceProfil.newProfil(this);
         this.displayProfil();
 
