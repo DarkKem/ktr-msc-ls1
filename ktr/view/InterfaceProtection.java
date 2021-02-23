@@ -1,11 +1,11 @@
 package ktr.view;
 
-import java.util.Scanner;
+import java.io.Console; 
 
 
 public class InterfaceProtection 
 {
-    private static Scanner scanner = new Scanner(System.in);
+    private static Console console=System.console();
 
     public static String connection()
     {
@@ -15,13 +15,13 @@ public class InterfaceProtection
         try {
                 System.out.println("--------Enter your username and password--------");
                 System.out.print("Username : ");
-                userName = scanner.nextLine();
+                userName = console.readLine();
                 System.out.print("Password : ");
-                password = scanner.nextLine();
+                password = new String(console.readPassword());
                 while(!password.equals("admin"))
                 {
                     System.out.println("Wrong pasword try again");
-                    password = scanner.nextLine();
+                    password = console.readLine();
                 }
         } catch (Exception e) {
             e.getStackTrace();

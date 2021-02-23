@@ -1,12 +1,11 @@
 package ktr.view;
 
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.Console;  
 
 import ktr.Controleur;
 
 public class InterfaceProfil {
-    private static Scanner scanner = new Scanner(System.in);
+    private static Console console=System.console();
 
     public static void newProfil(Controleur ctrl) {
 
@@ -19,17 +18,17 @@ public class InterfaceProfil {
             System.out.println("--------Create your profile---------");
 
             System.out.print("Enter you name : ");
-            name = scanner.nextLine();
+            name = console.readLine();
 
             System.out.print("Enter the name of you company : ");
-            nameCompany = scanner.nextLine();
+            nameCompany = console.readLine();
 
             System.out.print("Enter you email : ");
-            email = scanner.nextLine();
+            email = console.readLine();
 
             do {
                 System.out.print("Enter you phone number : ");
-                phone = scanner.next();
+                phone = console.readLine();
             } while (String.valueOf(phone).length() != 10 && !isInteger(phone));
 
         } catch (Exception e) {
@@ -53,7 +52,15 @@ public class InterfaceProfil {
     {
         System.out.println("----------- Your profile ------------");
 
-        System.out.println("Name : " + name +"\nCompany name : " + companyName + "\nEmail :" + email + "\nPhone number :" + phone);
+        System.out.println("Name : " + name +"\nCompany name : " + companyName + "\nEmail : " + email + "\nPhone number : " + phone);
+
+        System.out.println("Press enter to continue . . . ");
+        console.readLine();
+    }
+
+    public static void erreurExiste() 
+    {
+        System.out.println("The profil is not create, create a profil before");
     }
     
 }
