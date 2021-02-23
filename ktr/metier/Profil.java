@@ -1,4 +1,4 @@
-package Metier;
+package ktr.metier;
 
 public class Profil {
     private String name;
