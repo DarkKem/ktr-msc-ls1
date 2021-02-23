@@ -10,8 +10,8 @@ import ktr.view.InterfaceProtection;
 
 public class Controleur
 {
-    private Profil profil;
-    private String user;
+    private Profil  profil;
+    private String  user;
     private Library library;
 
     public Controleur()
@@ -38,13 +38,13 @@ public class Controleur
             {
                 case 1 : this.displayProfil();
                 break;
-                case 2 : this.displayListCards();
+                case 2 : this.displayListCards('A');
                 break;
                 case 3 : InterfaceProfil.newProfil(this);
                 break;
                 case 4 : InterfaceLibrary.addCard(this);
                 break;
-                case 5 : //TODE: Delete buisnesse card
+                case 5 : this.displayListCards('D');
                 break;
                 case 0 : return;
     
@@ -71,7 +71,7 @@ public class Controleur
             InterfaceProfil.displayProfil(profil.getName(), profil.getCompanyName(), profil.getEmail(), profil.getPhone());
     }
 
-    public void displayListCards()
+    public void displayListCards(char action)
     {
         String temp = "";
 
@@ -79,25 +79,22 @@ public class Controleur
         {
             temp += (i+1) + ") " + library.getCard(i).getName() + " of " + library.getCard(i).getCompanyName() + "\n";
         }
-        this.displayCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
+        if(action == 'A') this.displayCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
+        else 
+            if(action == 'D') library.deleteCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
     }
 
     public void displayCard(int indice)
     {
-        
         if(indice != -1)
         {
             Card temp = library.getCard(indice);
             InterfaceLibrary.displayCard(temp.getName(), temp.getCompanyName(), temp.getEmail(), temp.getPhone());
         }
-           
-        
-            
     }
     public static void main(String[] arg)
     {
         new Controleur();
     }
 
-	
 }
