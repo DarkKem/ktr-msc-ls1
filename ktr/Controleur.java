@@ -1,11 +1,14 @@
 package ktr;
+
 import ktr.metier.Profil;
-import ktr.view.IntefaceProfil;
+import ktr.view.InterfaceMenu;
+import ktr.view.InterfaceProfil;
 import ktr.view.InterfaceProtection;
 
 public class Controleur
 {
     private Profil profil;
+    private String user;
 
     public Controleur()
     {
@@ -14,8 +17,16 @@ public class Controleur
 
     public void play()
     {
-        InterfaceProtection.connection();
-        IntefaceProfil.newProfil(this);
+        switch(InterfaceMenu.menuConnexion())
+        {
+            case 1 : user = InterfaceProtection.connection();
+            break;
+            case 2 : return; //TODO: crate acounte  
+            //break;
+            case 0 : return;
+        }
+        
+        InterfaceProfil.newProfil(this);
         this.displayProfil();
 
     }
@@ -28,7 +39,7 @@ public class Controleur
     public void displayProfil()
     {
         if(profil != null)
-            IntefaceProfil.displayProfil(profil.getName(), profil.getCompanyName(), profil.getEmail(), profil.getPhone());
+            InterfaceProfil.displayProfil(profil.getName(), profil.getCompanyName(), profil.getEmail(), profil.getPhone());
     }
 
     public static void main(String[] arg)

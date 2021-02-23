@@ -3,7 +3,8 @@ package ktr.view;
 import java.util.Scanner;
 
 
-public class InterfaceProtection {
+public class InterfaceProtection 
+{
     private static Scanner scanner = new Scanner(System.in);
 
     public static String connection()
