@@ -1,16 +1,7 @@
-package ktr;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-import ktr.metier.Card;
-import ktr.metier.Library;
-import ktr.metier.Profil;
-import ktr.view.InterfaceLibrary;
-import ktr.view.InterfaceMenu;
-import ktr.view.InterfaceProfil;
-import ktr.view.InterfaceProtection;
 
 public class Controleur
 {
@@ -26,9 +17,10 @@ public class Controleur
     public void play()
     {
         this.Connexion();
-
+        
         while(true)
         {
+            if(user == null) return;
             switch(InterfaceMenu.menu())
             {
                 case 1 : this.displayProfil();
@@ -68,7 +60,7 @@ public class Controleur
 
     public void logout()
     {
-        user = "";
+        user = null;
         profil = null;
         library = null;
         this.Connexion();
@@ -150,7 +142,9 @@ public class Controleur
         } catch (Exception e) {
             e.printStackTrace();
         }
+        user = username;
         InterfaceProfil.newProfil(this);
+        
     }
     public static void main(String[] arg)
     {

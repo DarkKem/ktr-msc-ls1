@@ -1,7 +1,3 @@
-package ktr.view;
-
-import ktr.Controleur;
-
 import java.io.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

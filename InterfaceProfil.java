@@ -1,10 +1,7 @@
-package ktr.view;
-
 import java.io.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ktr.Controleur;
 
 public class InterfaceProfil {
     private static Console console=System.console();

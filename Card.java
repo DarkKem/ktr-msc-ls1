@@ -1,5 +1,3 @@
-package ktr.metier;
-
 public class Card 
 {
     protected String name;

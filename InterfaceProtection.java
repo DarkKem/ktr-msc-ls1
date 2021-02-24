@@ -1,8 +1,4 @@
-package ktr.view;
-
 import java.io.Console;
-
-import ktr.Controleur; 
 
 
 public class InterfaceProtection 

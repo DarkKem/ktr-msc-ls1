@@ -1,5 +1,3 @@
-package ktr.view;
-
 import java.io.Console; 
 
 public class InterfaceMenu 
