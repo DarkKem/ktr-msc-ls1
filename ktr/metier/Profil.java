@@ -1,5 +1,7 @@
 package ktr.metier;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 
 public class Profil extends Card {
@@ -12,14 +14,34 @@ public class Profil extends Card {
         this.phone       = phone;
     }
 
-    public Profil()
+    public Profil(String user)
     {
-        this.initValue();
+        this.initValue(user);
     }
 
-    private void initValue()
+    private void initValue(String user)
     {
+        BufferedReader lecteurAvecBuffer = null;
+        String ligne;
+        String[] temp;
+        try {
+            
+            lecteurAvecBuffer = new BufferedReader(new FileReader("ktr/data/"+user+".txt"));
+            if((ligne = lecteurAvecBuffer.readLine()) != null)
+            {
+                temp = ligne.split(";");
 
+                this.name        = temp[0];
+                this.companyName = temp[1];
+                this.email       = temp[2];
+                this.phone       = temp[3];
+            }
+                
+            lecteurAvecBuffer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }   
 
     public void saveValue(String user)

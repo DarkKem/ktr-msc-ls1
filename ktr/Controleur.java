@@ -25,6 +25,30 @@ public class Controleur
 
     public void play()
     {
+        this.Connexion();
+
+        while(true)
+        {
+            switch(InterfaceMenu.menu())
+            {
+                case 1 : this.displayProfil();
+                break;
+                case 2 : this.displayListCards();
+                break;
+                case 3 : InterfaceProfil.newProfil(this);
+                break;
+                case 4 : InterfaceLibrary.addCard(this);
+                break;
+                case 5 : this.logout();
+                break;
+                case 0 : return;
+    
+            }
+        }
+
+    }
+    public void Connexion()
+    {
         switch(InterfaceMenu.menuConnexion())
         {
             case 1 : user = InterfaceProtection.connection(this);
@@ -35,26 +59,19 @@ public class Controleur
         }
 
         this.library = new Library(user);
-
-        while(true)
+        if(profil == null)
         {
-            switch(InterfaceMenu.menu())
-            {
-                case 1 : this.displayProfil();
-                break;
-                case 2 : this.displayListCards('A');
-                break;
-                case 3 : InterfaceProfil.newProfil(this);
-                break;
-                case 4 : InterfaceLibrary.addCard(this);
-                break;
-                case 5 : this.displayListCards('D');
-                break;
-                case 0 : return;
-    
-            }
+            profil = new Profil(user);
+            library.init();
         }
+    }
 
+    public void logout()
+    {
+        user = "";
+        profil = null;
+        library = null;
+        this.Connexion();
     }
 
     public void addProfil(String name, String companyName, String email, String phone)
@@ -76,7 +93,7 @@ public class Controleur
             InterfaceProfil.displayProfil(profil.getName(), profil.getCompanyName(), profil.getEmail(), profil.getPhone());
     }
 
-    public void displayListCards(char action)
+    public void displayListCards()
     {
         String temp = "";
 
@@ -84,9 +101,8 @@ public class Controleur
         {
             temp += (i+1) + ") " + library.getCard(i).getName() + " of " + library.getCard(i).getCompanyName() + "\n";
         }
-        if(action == 'A') this.displayCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
-        else 
-            if(action == 'D') library.deleteCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
+
+        this.displayCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
     }
 
     public boolean passwordValid(String username, String password )

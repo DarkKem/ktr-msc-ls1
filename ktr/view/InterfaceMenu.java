@@ -41,7 +41,7 @@ public class InterfaceMenu
             System.out.println("2) Show buisness cards");
             System.out.println("3) Update Profil");
             System.out.println("4) Add buisness cards");
-            System.out.println("5) Delete buisness cards");
+            System.out.println("5) Log out");
             System.out.println("0) Quitte");
             
             enter = console.readLine();
