@@ -1,0 +1,3 @@
+admin;admin
+kemo;password
+darkkem;unmdp

@@ -1,12 +1,17 @@
 package ktr.view;
 
-import java.io.Console;  
+import java.io.Console;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import ktr.Controleur;
 
 public class InterfaceProfil {
     private static Console console=System.console();
 
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    
     public static void newProfil(Controleur ctrl) {
 
         String name = "none";
@@ -17,17 +22,19 @@ public class InterfaceProfil {
         try {
             System.out.println("--------Create your profile---------");
 
-            System.out.print("Enter you name : ");
+            System.out.print("Enter your name : ");
             name = console.readLine();
 
-            System.out.print("Enter the name of you company : ");
+            System.out.print("Enter the name of your company : ");
             nameCompany = console.readLine();
 
-            System.out.print("Enter you email : ");
-            email = console.readLine();
+            do {
+                System.out.print("Enter your email : ");
+                email = console.readLine();    
+            } while (!validateEmail(email));
 
             do {
-                System.out.print("Enter you phone number : ");
+                System.out.print("Enter your phone number : ");
                 phone = console.readLine();
             } while (String.valueOf(phone).length() != 10 && !isInteger(phone));
 
@@ -47,7 +54,11 @@ public class InterfaceProfil {
             return false;
         }
     }
-
+    
+    public static boolean validateEmail(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
+}
     public static void displayProfil(String name, String companyName, String email, String phone) 
     {
         System.out.println("----------- Your profile ------------");

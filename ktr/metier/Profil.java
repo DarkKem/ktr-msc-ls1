@@ -1,5 +1,7 @@
 package ktr.metier;
 
+import java.io.FileWriter;
+
 public class Profil extends Card {
 
     public Profil(String name, String companyName, String email, String phone)
@@ -20,8 +22,16 @@ public class Profil extends Card {
 
     }   
 
-    public void saveValue()
+    public void saveValue(String user)
     {
+        try {
+            FileWriter fw = new FileWriter("ktr/data/"+ user+".txt",false);
+            fw.write(name +";"+companyName+";"+email+";"+phone);
 
+            fw.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

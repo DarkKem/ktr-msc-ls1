@@ -1,5 +1,9 @@
 package ktr;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 import ktr.metier.Card;
 import ktr.metier.Library;
 import ktr.metier.Profil;
@@ -23,10 +27,10 @@ public class Controleur
     {
         switch(InterfaceMenu.menuConnexion())
         {
-            case 1 : user = InterfaceProtection.connection();
+            case 1 : user = InterfaceProtection.connection(this);
             break;
-            case 2 : return; //TODO: create acounte  
-            //break;
+            case 2 : InterfaceProtection.createAcounte(this);
+            break;
             case 0 : return;
         }
 
@@ -56,6 +60,7 @@ public class Controleur
     public void addProfil(String name, String companyName, String email, String phone)
     {
         profil = new Profil(name, companyName, email, phone);
+        profil.saveValue(user);
     }
 
     public void addCard(String name, String companyName, String email, String phone) 
@@ -84,6 +89,29 @@ public class Controleur
             if(action == 'D') library.deleteCard(InterfaceLibrary.listOfCard(temp, library.getNbCard()+1)-1);
     }
 
+    public boolean passwordValid(String username, String password )
+    {
+        BufferedReader lecteurAvecBuffer = null;
+        String ligne;
+        String[] temp;
+        boolean valReturn = false;
+        try {
+            
+            lecteurAvecBuffer = new BufferedReader(new FileReader("ktr/data/login.txt"));
+            while((ligne = lecteurAvecBuffer.readLine()) != null )
+            {
+                temp = ligne.split(";");
+                if(username.equals(temp[0]) && password.equals(temp[1])) valReturn = true;
+            }
+            lecteurAvecBuffer.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return valReturn;
+    }
+
     public void displayCard(int indice)
     {
         if(indice != -1)
@@ -91,6 +119,22 @@ public class Controleur
             Card temp = library.getCard(indice);
             InterfaceLibrary.displayCard(temp.getName(), temp.getCompanyName(), temp.getEmail(), temp.getPhone());
         }
+    }
+
+    public void addAcount(String username, String password)
+    {
+        try {
+            FileWriter fw = new FileWriter("ktr/data/login.txt",true);
+            fw.write("\n"+username + ";"+password);
+            fw.close();
+
+            fw = new FileWriter("ktr/data/"+username+".txt",true);
+            fw.write("");
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        InterfaceProfil.newProfil(this);
     }
     public static void main(String[] arg)
     {
